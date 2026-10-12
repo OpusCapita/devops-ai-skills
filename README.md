@@ -9,14 +9,6 @@ That means every skill lives under `.opencode/skills`, with one folder per skill
 
 More info about skills: https://opencode.ai/docs/skills/
 
-## Naming rules
-
-- Skill directory names must be lowercase.
-- Skill definition files must be named `SKILL.md`.
-- Skill names in `SKILL.md` must also be lowercase.
-- Names may contain lowercase letters, numbers, and single hyphens.
-- Uppercase letters should not be used in skill names or directory names.
-
 ## Main skills
 
 These are the shared, team-facing skills in this repository. Each skill captures reusable knowledge, procedures and lessons learned.
