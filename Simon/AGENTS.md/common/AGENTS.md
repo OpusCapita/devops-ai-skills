@@ -34,7 +34,7 @@ Use global pip to install common python deps
 OpenCode evicts a location after ~60 min with no session activity, killing the scope that delivers background-job completion notifications.
 
 - **Expected to finish within ~15 min:** use the shell tool's `background: true` and let the completion notification wake you.
-- **Expected to run longer:** run it detached in the OS background (`nohup ./job.sh > /tmp/opencode/job.out 2>&1 &`) so it survives OpenCode, then sleep in the foreground until it should finish — the sleep should match the job's expected duration, capped below 60 min.
+- **Expected to run longer:** run it detached in the OS background (`nohup ./job.sh > /tmp/opencode/job.out 2>&1 &`) so it survives OpenCode restarts. Then execute normal simple background monitoring job which finishes and wakes you when the main job is done.
 - On waking, verify status briefly; if still running, sleep again (same match-the-job rule). Read output only when done. If the job far outlives the context, hand the wait loop to a subagent.
 
 ## Ask, Don't Assume
@@ -48,14 +48,15 @@ OpenCode evicts a location after ~60 min with no session activity, killing the s
 ## LaTeX Rendering
 
 1. **Inline Delimiters:**
-    - MUST use `\(` and `\)`. Example: `\(a + b = c\)`.
+    - MUST use `\(` and `\)`. Example: \(a + b = c\).
     - **STRICT PROHIBITION:** NEVER use single dollar signs `$ ... $` or raw `$...$` under any circumstance. Single dollar signs break rendering in this client.
 
 2. **Display / Block Delimiters:**
     - Wrap with `$$` on their own separate lines:
-      $$
-      a^2 + b^2 = c^2
-      $$
+
+$$
+a^2 + b^2 = c^2
+$$
 
 3. **Text Sequences & Workflows:**
     - For step-by-step flows or transitions (e.g. "Start → Process → Finish"), use plain Unicode `→` or `->`.
